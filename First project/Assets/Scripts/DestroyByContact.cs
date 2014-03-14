@@ -12,13 +12,13 @@ public class DestroyByContact : MonoBehaviour
 		{
 			return;
 		}
-		Instantiate(explosion, transform.position, transform.rotation);
+		Network.Instantiate(explosion, transform.position, transform.rotation,0);
 		if (other.tag == "Player")
 		{
-			Instantiate(playerExplosion, other.transform.position, other.transform.rotation);
+			Network.Instantiate(playerExplosion, other.transform.position, other.transform.rotation,0);
 			//gameController.GameOver ();
 		}
-		Destroy(other.gameObject);
-		Destroy(gameObject);
+		Network.Destroy(other.gameObject);
+		Network.Destroy(gameObject);
 	}
 }

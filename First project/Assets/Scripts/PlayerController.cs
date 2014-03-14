@@ -27,7 +27,7 @@ public class PlayerController : MonoBehaviour
 			if (Input.GetButton ("Fire1") && Time.time > nextFire) 
 			{
 				nextFire = Time.time + fireRate;
-				Instantiate (shot, shotSpawn.position, shotSpawn.rotation);
+				Network.Instantiate (shot, shotSpawn.position, shotSpawn.rotation,0);
 				audio.Play ();
 			}
 		}
@@ -55,40 +55,6 @@ public class PlayerController : MonoBehaviour
 		
 			rigidbody.rotation = Quaternion.Euler (0.0f, 0.0f, rigidbody.velocity.x * -tilt);
 
-
-						/*float moveHorizontal;
-		float moveVertical;
-		
-		if ((Input.touchCount == 1)) 
-		{
-			if ( Input.GetTouch(0).position.x < (screenWidth/2) )
-			{
-				moveHorizontal = -1;
-			}
-			else
-			{
-				moveHorizontal = 1;
-			}
 		}
-		else
-		{
-			moveHorizontal = 0;
-		}
-
-		Vector3 movement = new Vector3(moveHorizontal, 0.0f, 0.0f);
-		rigidbody.velocity = movement * speed * Time.deltaTime;
-		
-		//movement script goes here 
-		rigidbody.position = new Vector3
-			(
-				Mathf.Clamp(rigidbody.position.x, boundary.xMin, boundary.xMax),
-				0.0f, 
-				Mathf.Clamp(rigidbody.position.z, boundary.zMin, boundary.zMax)
-				);
-
-		rigidbody.rotation = Quaternion.Euler (0.0f, 0.0f, rigidbody.velocity.x * -tilt);*/
-
-		}
-
 	}
 }
