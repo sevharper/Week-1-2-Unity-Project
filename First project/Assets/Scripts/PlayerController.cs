@@ -12,8 +12,8 @@ public class PlayerController : MonoBehaviour
 	public float speed;
 	public float tilt;
 	public Boundary boundary;
-	public float screenWidth = Screen.currentResolution.width;
-	public float screenHeight = Screen.currentResolution.height;
+	//public float screenWidth = Screen.GetResolution;
+	//public float screenHeight = Screen.currentResolution.height;
 
 	public GameObject shot;
 	public Transform shotSpawn;
@@ -22,37 +22,41 @@ public class PlayerController : MonoBehaviour
 
 	void Update ()
 	{
-		if (Input.GetButton("Fire1") && Time.time > nextFire)
+		if (networkView.isMine) 
 		{
-			nextFire = Time.time + fireRate;
-			Instantiate(shot, shotSpawn.position, shotSpawn.rotation);
-			audio.Play ();
+			if (Input.GetButton ("Fire1") && Time.time > nextFire) 
+			{
+				nextFire = Time.time + fireRate;
+				Instantiate (shot, shotSpawn.position, shotSpawn.rotation);
+				audio.Play ();
+			}
 		}
 	}
 
 	void FixedUpdate()
 	{
-
-		Vector3 dir = Vector3.zero;
-		dir.x = Input.acceleration.x;
-		//dir.z = Input.acceleration.x;
-		if (dir.sqrMagnitude > 1)
-			dir.Normalize();
+		if (networkView.isMine) 
+		{
+			Vector3 dir = Vector3.zero;
+			dir.x = Input.acceleration.x;
+			//dir.z = Input.acceleration.x;
+			if (dir.sqrMagnitude > 1)
+					dir.Normalize ();
 			
-		dir *= Time.deltaTime;
-		transform.Translate(dir * speed);
+			dir *= Time.deltaTime;
+			transform.Translate (dir * speed);
 
-		rigidbody.position = new Vector3
+			rigidbody.position = new Vector3
 			(
-				Mathf.Clamp(rigidbody.position.x, boundary.xMin, boundary.xMax),
+				Mathf.Clamp (rigidbody.position.x, boundary.xMin, boundary.xMax),
 				0.0f, 
-				Mathf.Clamp(rigidbody.position.z, boundary.zMin, boundary.zMax)
-				);
+				Mathf.Clamp (rigidbody.position.z, boundary.zMin, boundary.zMax)
+			);
 		
-		rigidbody.rotation = Quaternion.Euler (0.0f, 0.0f, rigidbody.velocity.x * -tilt);
+			rigidbody.rotation = Quaternion.Euler (0.0f, 0.0f, rigidbody.velocity.x * -tilt);
 
 
-		/*float moveHorizontal;
+						/*float moveHorizontal;
 		float moveVertical;
 		
 		if ((Input.touchCount == 1)) 
@@ -84,6 +88,7 @@ public class PlayerController : MonoBehaviour
 
 		rigidbody.rotation = Quaternion.Euler (0.0f, 0.0f, rigidbody.velocity.x * -tilt);*/
 
-		
+		}
+
 	}
 }

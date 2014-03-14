@@ -13,5 +13,6 @@
   </application>
   <uses-sdk android:minSdkVersion="9" android:targetSdkVersion="19" />
   <uses-feature android:glEsVersion="0x00020000" />
+  <uses-permission android:name="android.permission.INTERNET" />
   <uses-feature android:name="android.hardware.sensor.accelerometer" />
 </manifest>

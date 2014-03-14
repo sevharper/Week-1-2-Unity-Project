@@ -12,7 +12,10 @@ public class GameController : MonoBehaviour
 	
 	void Start ()
 	{
-		StartCoroutine (SpawnWaves ());
+		if (Network.isServer)
+		{
+			StartCoroutine (SpawnWaves ());
+		}
 	}
 	
 	IEnumerator SpawnWaves ()
@@ -24,7 +27,7 @@ public class GameController : MonoBehaviour
 			{
 				Vector3 spawnPosition = new Vector3 (Random.Range (-spawnValues.x, spawnValues.x), spawnValues.y, spawnValues.z);
 				Quaternion spawnRotation = Quaternion.identity;
-				Instantiate (hazard, spawnPosition, spawnRotation);
+				Network.Instantiate (hazard, spawnPosition, spawnRotation,0);
 				yield return new WaitForSeconds (spawnWait);
 			}
 			yield return new WaitForSeconds (waveWait);
