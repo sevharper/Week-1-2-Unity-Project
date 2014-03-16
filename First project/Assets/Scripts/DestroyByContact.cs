@@ -5,6 +5,8 @@ public class DestroyByContact : MonoBehaviour
 {
 	public GameObject explosion;
 	public GameObject playerExplosion;
+	public int scoreValue;
+	public GameController gameController;
 	
 	void OnTriggerEnter(Collider other) 
 	{
@@ -16,7 +18,13 @@ public class DestroyByContact : MonoBehaviour
 		if (other.tag == "Player")
 		{
 			Network.Instantiate(playerExplosion, other.transform.position, other.transform.rotation,0);
-			//gameController.GameOver ();
+			gameController = GameObject.FindWithTag("GameController").GetComponent<GameController>();
+			gameController.GameOver ();
+		}
+		else if (other.tag == "Laser")
+		{
+			gameController = GameObject.FindWithTag("GameController").GetComponent<GameController>();
+			gameController.AddScore(100);
 		}
 		Network.Destroy(other.gameObject);
 		Network.Destroy(gameObject);

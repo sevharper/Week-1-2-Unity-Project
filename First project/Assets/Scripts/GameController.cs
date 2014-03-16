@@ -10,10 +10,37 @@ public class GameController : MonoBehaviour
 	public float startWait;
 	public float waveWait;
 	public GUIText scoreText;
+	public GUIText restartText;
+	public GUIText gameOverText;
+	
+	private bool gameOver;
+	private bool restart;
+
 	public int score;
+
+	void Update ()
+	{
+		if (restart && Input.GetButton ("Fire1"))
+		{
+			Application.LoadLevel(Application.loadedLevel);
+		}
+	}
 
 	void Start ()
 	{
+		score = 0;
+
+		scoreText = GameObject.FindWithTag("ScoreText").GetComponent<GUIText>();
+		gameOverText = GameObject.FindWithTag("GameOverText").GetComponent<GUIText>();
+		restartText = GameObject.FindWithTag("RestartText").GetComponent<GUIText>();
+
+		gameOver = false;
+		restart = false;
+		gameOverText.text = "";
+		restartText.text = "";
+
+		UpdateScore ();
+
 		if (Network.isServer)
 		{
 			StartCoroutine (SpawnWaves ());
@@ -33,11 +60,30 @@ public class GameController : MonoBehaviour
 				yield return new WaitForSeconds (spawnWait);
 			}
 			yield return new WaitForSeconds (waveWait);
+			if (gameOver)
+			{
+				restartText.text = "Tap on screen to restart level.";
+				restart = true;
+				break;
+			}
 		}
+	}
+
+	public void AddScore (int newScoreValue)
+	{
+		score += newScoreValue;
+		UpdateScore ();
 	}
 
 	void UpdateScore ()
 	{
 		scoreText.text = "Score: " + score;
 	}
+
+	public void GameOver ()
+	{
+		gameOverText.text = "Game Over!";
+		gameOver = true;
+	}
+
 }

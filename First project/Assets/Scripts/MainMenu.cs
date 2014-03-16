@@ -8,9 +8,16 @@ public class MainMenu : MonoBehaviour {
 	public Camera camera;
 	private float screenWidth = 0;
 	private float screenHeight = Screen.height;
+	public GUIText scoreText;
+	public GUIText gameOverText;
+	public GUIText restartText;
 
 	// Use this for initialization
 	void Start () {
+
+		scoreText.text = "";
+		gameOverText.text = "";
+		restartText.text = "";
 		screenWidth = camera.pixelWidth;
 		networkManager = GameObject.FindWithTag("NetworkManager").GetComponent<NetworkManager>();
 	}
