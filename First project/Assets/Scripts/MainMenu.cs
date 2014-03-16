@@ -43,7 +43,7 @@ public class MainMenu : MonoBehaviour {
 			if (GUI.Button(new Rect((screenWidth/2 - screenWidth/4), 
 			                        (screenHeight/6 * 3), 
 			                        (screenWidth/2), 
-			                        (screenHeight/6)), "Join Game"))
+			                        (screenHeight/6)), "Join Game (Double Tap)"))
 			{
 				networkManager.RefreshHostList();
 				if (networkManager.hostList != null)
