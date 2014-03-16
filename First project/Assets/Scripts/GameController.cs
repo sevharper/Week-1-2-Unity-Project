@@ -9,7 +9,9 @@ public class GameController : MonoBehaviour
 	public float spawnWait;
 	public float startWait;
 	public float waveWait;
-	
+	public GUIText scoreText;
+	public int score;
+
 	void Start ()
 	{
 		if (Network.isServer)
@@ -32,5 +34,10 @@ public class GameController : MonoBehaviour
 			}
 			yield return new WaitForSeconds (waveWait);
 		}
+	}
+
+	void UpdateScore ()
+	{
+		scoreText.text = "Score: " + score;
 	}
 }

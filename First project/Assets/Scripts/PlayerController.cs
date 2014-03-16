@@ -12,13 +12,19 @@ public class PlayerController : MonoBehaviour
 	public float speed;
 	public float tilt;
 	public Boundary boundary;
-	//public float screenWidth = Screen.GetResolution;
-	//public float screenHeight = Screen.currentResolution.height;
+	//public float screenWidth = Screen.width;
+	//public float screenHeight = Screen.height;
 
 	public GameObject shot;
 	public Transform shotSpawn;
 	public float fireRate;
 	private float nextFire;
+	private int playerNum;
+
+	public PlayerController (int networkNumber)
+	{
+		playerNum = networkNumber;
+	}
 
 	void Update ()
 	{

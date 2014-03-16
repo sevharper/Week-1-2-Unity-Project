@@ -7,13 +7,14 @@ public class NetworkManager : MonoBehaviour {
 	private const string gameName = "SharperExclusiveRoomName";
 	public GameObject playerPrefab;
 	public GameObject gameController;
-	
-	private void SpawnPlayer()
+	public HostData[] hostList;
+
+	public void SpawnPlayer()
 	{
 		Network.Instantiate(playerPrefab, new Vector3(0f, 0f, 0f), Quaternion.identity, 0);
 	}
 	
-	private void StartServer()
+	public void StartServer()
 	{
 		Network.InitializeServer(4, 25000, !Network.HavePublicAddress());
 		MasterServer.RegisterHost(typeName, gameName);
@@ -26,7 +27,7 @@ public class NetworkManager : MonoBehaviour {
 		Debug.Log("Server Initializied");
 	}
 
-	void OnGUI()
+	/*void OnGUI()
 	{
 		if (!Network.isClient && !Network.isServer)
 		{
@@ -45,11 +46,10 @@ public class NetworkManager : MonoBehaviour {
 				}
 			}
 		}
-	}
+	}*/
 
-	private HostData[] hostList;
-	
-	private void RefreshHostList()
+
+	public void RefreshHostList()
 	{
 		MasterServer.RequestHostList(typeName);
 	}
@@ -60,11 +60,11 @@ public class NetworkManager : MonoBehaviour {
 			hostList = MasterServer.PollHostList();
 	}
 
-	private void JoinServer(HostData hostData)
+	public void JoinServer(HostData hostData)
 	{
 		Network.Connect(hostData);
 	}
-	
+
 	void OnConnectedToServer()
 	{
 		SpawnPlayer();
