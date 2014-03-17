@@ -12,6 +12,7 @@ public class GameController : MonoBehaviour
 	public GUIText scoreText;
 	public GUIText restartText;
 	public GUIText gameOverText;
+	public int waveNumber = 0;
 	
 	private bool gameOver;
 	private bool restart;
@@ -60,6 +61,13 @@ public class GameController : MonoBehaviour
 				yield return new WaitForSeconds (spawnWait);
 			}
 			yield return new WaitForSeconds (waveWait);
+
+			waveNumber++;
+			if (waveNumber > 0)
+			{
+				GameOver("You Win!");
+			}
+
 			if (gameOver)
 			{
 				restartText.text = "Tap on screen to restart level.";
@@ -80,9 +88,9 @@ public class GameController : MonoBehaviour
 		scoreText.text = "Score: " + score;
 	}
 
-	public void GameOver ()
+	public void GameOver (string endText)
 	{
-		gameOverText.text = "Game Over!";
+		gameOverText.text = endText;
 		gameOver = true;
 	}
 

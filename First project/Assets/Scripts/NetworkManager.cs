@@ -8,6 +8,19 @@ public class NetworkManager : MonoBehaviour {
 	public GameObject playerPrefab;
 	public GameObject gameController;
 	public HostData[] hostList;
+	public Camera camera;
+	public bool gameIsRunning = false;
+
+	private float screenWidth = 0;
+	private float screenHeight = Screen.height;
+	
+
+	void Start()
+	{
+		screenWidth = camera.pixelWidth;
+
+	}
+
 
 	public void SpawnPlayer()
 	{
@@ -27,26 +40,41 @@ public class NetworkManager : MonoBehaviour {
 		Debug.Log("Server Initializied");
 	}
 
-	/*void OnGUI()
+	void OnGUI()
 	{
-		if (!Network.isClient && !Network.isServer)
+		if (!Network.isClient && !Network.isServer && !gameIsRunning)
 		{
-			if (GUI.Button(new Rect(100, 100, 250, 100), "Start Server"))
+			if (GUI.Button(new Rect((screenWidth/2 - screenWidth/4), 
+			                        (screenHeight/6 * 2), 
+			                        (screenWidth/2), 
+			                        (screenHeight/6)), "Start Game"))
+			{
 				StartServer();
+			}
 			
-			if (GUI.Button(new Rect(100, 250, 250, 100), "Refresh Hosts"))
+			if (GUI.Button(new Rect((screenWidth/2 - screenWidth/4), 
+			                        (screenHeight/6 * 3), 
+			                        (screenWidth/2), 
+			                        (screenHeight/6)), "Join Game"))
+			{
 				RefreshHostList();
+			}
 			
 			if (hostList != null)
 			{
 				for (int i = 0; i < hostList.Length; i++)
 				{
-					if (GUI.Button(new Rect(400, 100 + (110 * i), 300, 100), hostList[i].gameName))
+					if (GUI.Button(new Rect((screenWidth/2 - screenWidth/4), 
+					               			(screenHeight/6 * 4), 
+					              		 	(screenWidth/2), 
+					               			(screenHeight/6)), hostList[i].gameName))
+					{
 						JoinServer(hostList[i]);
+					}
 				}
 			}
 		}
-	}*/
+	}
 
 
 	public void RefreshHostList()

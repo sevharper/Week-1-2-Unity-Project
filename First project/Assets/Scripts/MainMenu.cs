@@ -27,7 +27,7 @@ public class MainMenu : MonoBehaviour {
 
 	}
 
-	void OnGUI()
+	/*void OnGUI()
 	{
 		if(!gameIsRunning)
 		{
@@ -53,15 +53,15 @@ public class MainMenu : MonoBehaviour {
 				}
 			}
 
-			/*if (networkManager.hostList != null)
+			if (networkManager.hostList != null)
 			{
 				for (int i = 0; i < networkManager.hostList.Length; i++)
 				{
 					if (GUI.Button(new Rect(400, 100 + (110 * i), 300, 100), networkManager.hostList[i].gameName))
 						networkManager.JoinServer(networkManager.hostList[i]);
 				}
-			}*/
+			}
 		}
 
-	}
+	}*/
 }

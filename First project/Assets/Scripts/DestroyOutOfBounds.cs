@@ -11,7 +11,7 @@ public class DestroyOutOfBounds : MonoBehaviour
 		if (other.tag == "Asteroid")
 		{
 			gameController = GameObject.FindWithTag("GameController").GetComponent<GameController>();
-			gameController.GameOver ();
+			gameController.GameOver ("Game Over!");
 		}
 	}
 }

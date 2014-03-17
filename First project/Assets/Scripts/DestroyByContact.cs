@@ -19,7 +19,7 @@ public class DestroyByContact : MonoBehaviour
 		{
 			Network.Instantiate(playerExplosion, other.transform.position, other.transform.rotation,0);
 			gameController = GameObject.FindWithTag("GameController").GetComponent<GameController>();
-			gameController.GameOver ();
+			gameController.GameOver ("Game Over!");
 		}
 		else if (other.tag == "Laser")
 		{
